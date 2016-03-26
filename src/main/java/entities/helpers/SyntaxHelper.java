@@ -14,4 +14,5 @@ public class SyntaxHelper {
 
     //Messages
     public static final String IllegalPunctuationMark="The word should not contain punctuations marks!";
+    public static final String NO_SYNONYM_MSG ="Synonym does not set or initialize";
 }

@@ -2,71 +2,71 @@ package entities;
 
 import entities.helpers.SyntaxHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by mit_OK! on 17.03.2016.
  */
 public class Word extends Lexeme{
-    private String prefixSymbols = "";
-    private String postfixSymbols = "";
-    private Boolean capitalize = false;
-    private String canonical = null;
-    private String synonym = null;
+    private String canonical;
+    private WordFormat wordFormat;
+    private Grammar wordGrammar;
+    private ArrayList<Synonym> synonyms;
 
     public Word() {
     }
 
-    public Word(String rawWord) {
-        init(rawWord);
-    }
+    /* === GETTERS AND SETTERS === */
 
     public String getCanonical() {
         return canonical;
     }
 
-    public String getSynonym() {
-        return synonym;
+    public void setCanonical(String canonical) {
+        this.canonical = canonical;
     }
 
-    public void setSynonym(String synonym) {
-        this.synonym = synonym;
+    public WordFormat getWordFormat() {
+        return wordFormat;
     }
 
-    public String getFormattedSynonym(String synonym) {
-        String readySynonym = synonym;
-        if (capitalize) readySynonym = firstUpperCase(readySynonym);
-        return prefixSymbols+readySynonym+postfixSymbols;
+    public void setWordFormat(WordFormat wordFormat) {
+        this.wordFormat = wordFormat;
     }
 
-    public void init (String rawWord) {
-        rawValue = rawWord;
-        rawValue = rawWord.substring(createPrefix(),rawValue.length()-createPostfix());
-        if (rawValue.charAt(0)==rawValue.toUpperCase().charAt(0)) capitalize = true;
-        canonical = rawValue;
-        synonym = rawValue;
+    public Grammar getWordGrammar() {
+        return wordGrammar;
     }
 
-    public int createPrefix () {
-        for (int i = 0; i < SyntaxHelper.wordCanBegin.length; i++) {
-            if (rawValue.startsWith(SyntaxHelper.wordCanBegin[i])){
-                prefixSymbols = SyntaxHelper.wordCanBegin[i];
-                return prefixSymbols.length();
-            }
+    public void setWordGrammar(Grammar wordGrammar) {
+        this.wordGrammar = wordGrammar;
+    }
+
+    public ArrayList<Synonym> getSynonyms() {
+        return synonyms;
+    }
+
+    public void setSynonyms(ArrayList<Synonym> synonyms) {
+        this.synonyms = synonyms;
+    }
+    /* =========================== */
+
+    public void setFirstSynonym (Synonym synonym) {
+        if (synonyms == null) {
+            synonyms = new ArrayList<>();
         }
-        return 0;
+        synonyms.set(0,synonym);
     }
 
-    public int createPostfix () {
-        for (int i = 0; i < SyntaxHelper.worCanEnd.length; i++) {
-            if (rawValue.startsWith(SyntaxHelper.worCanEnd[i])){
-                postfixSymbols = SyntaxHelper.worCanEnd[i];
-                return postfixSymbols.length();
+    public Synonym getFirstSynonym (){
+        if (synonyms == null) {
+            if (rawValue == null) {
+                throw new NullPointerException(SyntaxHelper.NO_SYNONYM_MSG);
+            } else {
+                return new Synonym(rawValue);
             }
+        } else {
+            return synonyms.get(0);
         }
-        return 0;
-    }
-
-    public static String firstUpperCase(String word){
-        if(word == null || word.isEmpty()) return "";
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 }
