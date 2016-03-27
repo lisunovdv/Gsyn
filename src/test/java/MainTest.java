@@ -1,22 +1,37 @@
+import com.Controller;
+import com.syn.phrase.PunctTextSplitter;
+import entities.Phrase;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by user on 10.03.2016.
- */
 public class MainTest {
 
     @Test
     public void someTests() {
-        String p = "(?miu)"+ Pattern.quote("В России");
-        String str = "Тест в России запретили, да В России всё запрещают, в России";
-        Pattern pat = Pattern.compile(p);
-        Matcher m = pat.matcher(str);
-
-        //String res = str.replaceAll(p,"in USSR");
-        System.out.println(m.groupCount());
+       String s = "А у нас..8. всё хорошо";
+        String [] result = s.split("\\.\\.\\.\\s");
+        for (String aResult : result) {
+            System.out.println(aResult);
+        }
         //
+    }
+
+    @Test
+    public void ControllerTest() {
+        Controller controller = new Controller();
+        controller.run();
+    }
+
+    @Test
+    public void SplitterTest() {
+        String s = ":А у нас... всё | хорошо... Правда? Не ??? так ведь?.. А то не|| так подумают. Что так: и есть!";
+        PunctTextSplitter splitter = new PunctTextSplitter();
+        LinkedList<Phrase> phraseLinkedList = splitter.decomposeForMultiTreading(s);
+        for (int i = 0; i < phraseLinkedList.size(); i++) {
+            System.out.println(phraseLinkedList.get(i).getRawValue()+" //"+phraseLinkedList.get(i).isExcluded());
+        }
     }
 }

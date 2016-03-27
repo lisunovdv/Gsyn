@@ -1,13 +1,15 @@
 package com;
 
-import entities.helpers.TextLoader;
+import com.syn.phrase.PhraseSynonymizer;
+import com.txt_norm.DefaultTextNormalizer;
+import com.txt_src.DefaultTextLoader;
 
-/**
- * Created by mit_OK! on 18.03.2016.
- */
+
 public class Controller {
 
     public void run () {
-        new SynCore().synonymize(new TextLoader().load());
+        SynCore synCore = new SynCore();
+        synCore.launch(new DefaultTextLoader(),new DefaultTextNormalizer(), new PhraseSynonymizer());
+        System.out.println(synCore.getText());
     }
 }

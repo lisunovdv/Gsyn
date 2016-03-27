@@ -1,4 +1,4 @@
-package entities.word_classes;
+package entities.gram;
 
 /**
  * Created by mit_OK! on 26.03.2016.

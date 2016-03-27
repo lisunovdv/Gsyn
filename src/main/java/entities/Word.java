@@ -1,17 +1,15 @@
 package entities;
 
+import entities.gram.Grammar;
 import entities.helpers.SyntaxHelper;
 
 import java.util.ArrayList;
 
-/**
- * Created by mit_OK! on 17.03.2016.
- */
-public class Word extends Lexeme{
+public class Word<W extends WordFormat,G extends Grammar, S extends Synonym> extends Lexeme{
     private String canonical;
-    private WordFormat wordFormat;
-    private Grammar wordGrammar;
-    private ArrayList<Synonym> synonyms;
+    private W wordFormat;
+    private G wordGrammar;
+    private ArrayList<S> synonyms;
 
     public Word() {
     }
@@ -21,37 +19,34 @@ public class Word extends Lexeme{
     public String getCanonical() {
         return canonical;
     }
-
     public void setCanonical(String canonical) {
         this.canonical = canonical;
     }
 
-    public WordFormat getWordFormat() {
+    public W getWordFormat() {
         return wordFormat;
     }
-
-    public void setWordFormat(WordFormat wordFormat) {
+    public void setWordFormat(W wordFormat) {
         this.wordFormat = wordFormat;
     }
 
-    public Grammar getWordGrammar() {
+    public G getWordGrammar() {
         return wordGrammar;
     }
-
-    public void setWordGrammar(Grammar wordGrammar) {
+    public void setWordGrammar(G wordGrammar) {
         this.wordGrammar = wordGrammar;
     }
 
-    public ArrayList<Synonym> getSynonyms() {
+    public ArrayList<S> getSynonyms() {
         return synonyms;
     }
-
-    public void setSynonyms(ArrayList<Synonym> synonyms) {
+    public void setSynonyms(ArrayList<S> synonyms) {
         this.synonyms = synonyms;
     }
-    /* =========================== */
 
-    public void setFirstSynonym (Synonym synonym) {
+/* =========================== */
+
+    public void setFirstSynonym (S synonym) {
         if (synonyms == null) {
             synonyms = new ArrayList<>();
         }

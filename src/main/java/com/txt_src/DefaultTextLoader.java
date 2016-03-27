@@ -1,4 +1,4 @@
-package entities.helpers;
+package com.txt_src;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 /**
  * Created by mit_OK! on 18.03.2016.
  */
-public class TextLoader {
-
-    public String load () {
+public class DefaultTextLoader implements ITextLoader {
+    @Override
+    public String loadText(String... args) {
         ArrayList<String> strings = null;
         String somePath = "src/main/resources/input.txt";
         try {
@@ -21,8 +21,9 @@ public class TextLoader {
         }
         String result = "";
         for (String s : strings) {
-            result += s;
+            result += s+"\n";
         }
         return result;
     }
+
 }
