@@ -2,6 +2,8 @@ package entities;
 
 import entities.helpers.SyntaxHelper;
 
+import java.util.regex.Pattern;
+
 public class PrefixAndPostfixHolder {
     private String prefix = "";
     private String postfix = "";
@@ -35,10 +37,13 @@ public class PrefixAndPostfixHolder {
     /** =========================== */
 
     public void init (String rawWord) {
-        for (int i = 0; i < SyntaxHelper.punctuationMarks.length; i++) {
-            String punctuator = SyntaxHelper.punctuationMarks[i];
-            this.prefix = (rawWord.startsWith(punctuator) && this.prefix.equals(""))? punctuator : this.prefix;
-            this.postfix = (rawWord.endsWith(punctuator) && this.postfix.equals(""))? punctuator : this.postfix;
+        boolean hasAlnum = Pattern.compile("\\p{IsAlphabetic}").matcher(rawWord).find();
+        if (hasAlnum) {// TODO Some troubles with IT
+            for (int i = 0; i < SyntaxHelper.punctuationMarks.length; i++) {
+                String punctuator = SyntaxHelper.punctuationMarks[i];
+                this.prefix += (rawWord.startsWith(punctuator) && this.prefix.equals(""))? punctuator : ""; // Add singleOutRawWord
+                this.postfix += (rawWord.endsWith(punctuator) && this.postfix.equals(""))? punctuator : ""; // Add singleOutRawWord
+            }
         }
     }
 
@@ -59,5 +64,13 @@ public class PrefixAndPostfixHolder {
             }
         }
         return "";
+    }
+
+    @Override
+    public String toString() {
+        return "PrefixAndPostfixHolder{" +
+                "prefix='" + prefix + '\'' +
+                ", postfix='" + postfix + '\'' +
+                '}';
     }
 }

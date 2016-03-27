@@ -15,7 +15,7 @@ public class WordFactory implements IWordCreator {
         wordObject.setRawValue(wordFormat.saveWordFormat(crudeWord));
         wordObject.setWordFormat(wordFormat);
         ArrayList<Synonym> synonymsArrayList = new ArrayList<>();
-        synonymsArrayList.set(0,new Synonym(wordObject.getRawValue()));
+        synonymsArrayList.add(0,new Synonym(wordObject.getRawValue()));
         wordObject.setSynonyms(synonymsArrayList);
         wordObject.setCanonical(wordObject.getRawValue());
 

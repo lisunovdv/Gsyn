@@ -33,6 +33,7 @@ public class SynCore implements ISynCore{
 
     @Override
     public IReport synonymizeText(ISynonymizer synonymizer) {
+        synonymizer.synonymize(this.text);
         return new DefaultReport();
     }
 

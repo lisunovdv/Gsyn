@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * Created by mit_OK! on 27.03.2016.
  */
-public class PunctTextSplitter implements ITextSplitter{
+public class PunctuationTextSplitter implements ITextSplitter{
 
 
 
@@ -21,7 +21,7 @@ public class PunctTextSplitter implements ITextSplitter{
             for (int j = 0; j < phrases.size(); j++) {
                 Phrase oneOfPhrase = phrases.get(j);
                 if (!oneOfPhrase.isExcluded()) {
-                    splittedText = phrases.get(j).getRawValue().split(SyntaxHelper.dividers[i]+"\\s");
+                    splittedText = phrases.get(j).getRawValue().split(SyntaxHelper.dividers[i]+"\\s");// TODO Why it works???
                     if (splittedText.length > 1) {
                         phrases.remove(j);
                         int orderNo = j;

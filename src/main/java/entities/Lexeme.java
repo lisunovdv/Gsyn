@@ -5,6 +5,7 @@ package entities;
  */
 public class Lexeme extends Morpheme{
     protected String rawValue;
+    protected boolean excluded = false;
 
     public Lexeme() {
     }
@@ -14,5 +15,12 @@ public class Lexeme extends Morpheme{
     }
     public void setRawValue(String rawValue) {
         this.rawValue = rawValue;
+    }
+
+    public boolean isExcluded() {
+        return excluded;
+    }
+    public void setExcluded(boolean excluded) {
+        this.excluded = excluded;
     }
 }
