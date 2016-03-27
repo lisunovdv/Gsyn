@@ -5,9 +5,7 @@ import entities.Phrase;
 
 import java.util.LinkedList;
 
-/**
- * Created by mit_OK! on 26.03.2016.
- */
+
 public class PhraseSynonymizer implements ISynonymizer {
 
     @Override
